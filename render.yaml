@@ -6,20 +6,30 @@ services:
     startCommand: vendor/bin/heroku-php-apache2 public/
     envVars:
       - key: APP_KEY
-        generateValue: true
+        sync: false
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
         value: false
       - key: DB_CONNECTION
-        value: mysql
+        value: pgsql
       - key: DB_HOST
-        sync: false
+        fromDatabase:
+          name: certificados-db
+          property: host
       - key: DB_PORT
-        value: 3306
+        fromDatabase:
+          name: certificados-db
+          property: port
       - key: DB_DATABASE
-        sync: false
+        fromDatabase:
+          name: certificados-db
+          property: database
       - key: DB_USERNAME
-        sync: false
+        fromDatabase:
+          name: certificados-db
+          property: user
       - key: DB_PASSWORD
-        sync: false 
+        fromDatabase:
+          name: certificados-db
+          property: password 
